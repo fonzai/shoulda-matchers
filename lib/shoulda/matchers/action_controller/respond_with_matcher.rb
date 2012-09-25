@@ -54,7 +54,11 @@ module Shoulda # :nodoc:
         end
 
         def response_code
-          @controller.response.response_code
+          if @controller.respond_to?(:response_code)
+            @controller.response_code
+          else
+            @controller.response.response_code
+          end
         end
 
         def symbol_to_status_code(potential_symbol)
